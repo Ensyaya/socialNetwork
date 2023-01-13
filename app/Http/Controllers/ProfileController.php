@@ -51,23 +51,18 @@ class ProfileController extends Controller
                 'image' => $imagePath,
                 'imageId' => $imageId,
             ]);
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'image' => $user->image,
+                'imageId' => $user->imageId,
+            ]);
         }
-
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'image' => $user->image,
-            'imageId' => $user->imageId,
-        ]);
-
-
-
 
         // if ($request->user()->isDirty('email')) {
         //     $request->user()->email_verified_at = null;
         // }
-
-
         return Redirect::route('profile.edit');
     }
 

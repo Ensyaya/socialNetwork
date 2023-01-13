@@ -74,7 +74,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         name="image"
                         className="mt-1 block w-full p-2"
                         autoComplete="image"
-                        isFocused={true}
                         handleChange={e => setData('image', e.target.files[0])}
                     />
 
