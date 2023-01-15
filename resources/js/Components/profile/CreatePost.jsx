@@ -1,5 +1,5 @@
 import React from "react";
-import CrateCommentModal from "./CrateCommentModal";
+import CreatePostModal from "./CreatePostModal";
 
 export default function CreatePost({ auth }) {
     const [showPostModal, setShowPostModal] = React.useState(false);
@@ -22,11 +22,11 @@ export default function CreatePost({ auth }) {
                         onClick={openModal}
                         className="flex-1 hover:bg-slate-200 hover:rounded-full bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt"
                     >
-                        <span>What's on your mind, Can ?</span>
+                        <span>What's on your mind, {auth.user.name} ?</span>
                     </div>
                 </div>
                 {showPostModal && (
-                    <CrateCommentModal
+                    <CreatePostModal
                     setShowPostModal={setShowPostModal}
                     />
                 )}

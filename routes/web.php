@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\post\PostController;
 use App\Http\Controllers\pages\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::post('user/post', [PostController::class, 'createPost'])->name('post.createPost');
     Route::post('user/post/{id}', [PostController::class, 'updatePost'])->name('post.updatePost');
     Route::delete('user/post/{id}', [PostController::class, 'deletePost'])->name('post.deletePost');
+
+    Route::get('user/profile/{slug}', [PageController::class, 'userProfile'])->name('profile.userProfile');
+
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');

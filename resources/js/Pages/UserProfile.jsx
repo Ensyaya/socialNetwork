@@ -1,17 +1,16 @@
-import CreatePost from "@/Components/profile/CreatePost";
-import Post from "@/Components/profile/Post";
-import ProfileHeader from "@/Components/profile/ProfileHeader";
+import UserPost from "@/Components/profile/UserPost";
+import UserProfileHeader from "@/Components/profile/UserProfileHeader";
 import MainLayout from "@/Layouts/MainLayout";
 import { Head, Link } from "@inertiajs/inertia-react";
 
-export default function Profile(props) {
+export default function UserProfile(props) {
     return (
         <MainLayout auth={props.auth} errors={props.errors}>
-            <Head title="Profile" />
+            <Head title={`Profile | @${props.user.username}`} />
             <div className="h-full ">
                 <div className=" shadow bg-gray-50 h-full">
                     {/* PROFILE HEADER */}
-                    <ProfileHeader auth={props.auth} />
+                    <UserProfileHeader user={props.user} />
                     {/* END PROFILE HEADER */}
 
                     {/* // CONTENT */}
@@ -160,15 +159,11 @@ export default function Profile(props) {
 
                                 {/* // POST LIST */}
                                 <div className="sm:w-full md:w-1/2 lg:w-1/3">
-                                    {/* CREATE POST */}
-                                    <CreatePost auth={props.auth} />
-                                    {/* END CREATE POST */}
-
                                     {/* POST */}
                                     {props.posts.map((post, key) => {
                                         return (
-                                            <Post
-                                                auth={props.auth}
+                                            <UserPost
+                                                user={props.user}
                                                 key={post.id}
                                                 post={post}
                                             />

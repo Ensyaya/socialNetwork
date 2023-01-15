@@ -1,26 +1,7 @@
 import React from "react";
 import Moment from "moment";
-import Dropdown from "../Dropdown";
-import { useForm } from "@inertiajs/inertia-react";
-import UpdatePostModal from "./UpdatePostModal";
 
-export default function Post({ auth, post }) {
-    const [showUpdatePostModal, setShowUpdatePostModal] = React.useState(false);
-
-    const openModal = () => {
-        setShowUpdatePostModal(true);
-    };
-
-    const { delete: destroy, errors } = useForm();
-
-    const deletePost = (e, id = post.id) => {
-        e.preventDefault();
-
-        destroy(route("post.deletePost", id), {
-            preserveScroll: true,
-        });
-    };
-
+export default function UserPost({ post,user }) {
     return (
         <div>
             {/* // POST */}
@@ -30,7 +11,7 @@ export default function Post({ auth, post }) {
                     <div className="flex space-x-2 items-center">
                         <div className="relative">
                             <img
-                                src={auth.user.image}
+                                src={user.image}
                                 alt="Profile picture"
                                 className="w-10 h-10 rounded-full"
                             />
@@ -38,23 +19,8 @@ export default function Post({ auth, post }) {
                         </div>
                         <div>
                             <div className="font-semibold">
-                                {auth.user.name}
+                                {user.name}
                             </div>
-                            {post.post_status == "Open to Everyone" &&
-                            <div className="text-sm">
-                               <i className="fa-solid fa-earth-americas"></i> {post.post_status}
-                            </div>
-                            }
-                            {post.post_status == "Only Friends" &&
-                            <div className="text-sm">
-                               <i className="fa-solid fa-user-group"></i> {post.post_status}
-                            </div>
-                            }
-                            {post.post_status == "Hidden" &&
-                            <div className="text-sm">
-                               <i className="fa-solid fa-lock"></i> {post.post_status}
-                            </div>
-                            }
                             <span className="text-sm text-gray-500">
                                 {Moment(post.created_at).format(
                                     "DD.MMM.YYYY H:mm"
@@ -62,37 +28,6 @@ export default function Post({ auth, post }) {
                             </span>
                         </div>
                     </div>
-                    <Dropdown>
-                        <Dropdown.Trigger>
-                            <div className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 rounded-full cursor-pointer">
-                                <i className="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </Dropdown.Trigger>
-                        <Dropdown.Content>
-                            <form onSubmit={deletePost}>
-                                <button
-                                    type="submit"
-                                    className="block w-full px-4 py-2 text-left leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                                >
-                                    <i className="fa-solid fa-trash mr-2"></i>
-                                    Delete
-                                </button>
-                            </form>
-                            <button
-                                onClick={openModal}
-                                className="block w-full px-4 py-2 text-left leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                            >
-                                <i className="fa-solid fa-pen-to-square mr-2"></i>
-                                Update
-                            </button>
-                        </Dropdown.Content>
-                    </Dropdown>
-                    {showUpdatePostModal && (
-                        <UpdatePostModal
-                            setShowUpdatePostModal={setShowUpdatePostModal}
-                            post={post}
-                        />
-                    )}
                 </div>
                 {/* END POST AUTHOR */}
 
@@ -104,7 +39,7 @@ export default function Post({ auth, post }) {
                     <div className="text-justify px-4 py-2">
                         <img
                             src={post.post_image}
-                            alt={auth.user.name}
+                            alt=""
                             className="max-h-full max-w-full  min-h-full min-w-full p-2"
                         />
                     </div>

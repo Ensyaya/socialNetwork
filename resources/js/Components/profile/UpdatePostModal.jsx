@@ -8,6 +8,7 @@ function UpdatePostModal(props) {
     const { data, setData, post, reset, errors } = useForm({
         content: props.post.post_content,
         image: props.post.post_image ? props.post.post_image : "",
+        status: props.post.post_status,
     });
     const onHandleChange = (event) => {
         setData(
@@ -54,7 +55,7 @@ function UpdatePostModal(props) {
                             </div>
                             <InputError
                                 message={errors.content}
-                                className="mt-2 mx-4"
+                                className="mt-2 mx-6"
                             />
 
                             <div className="relative p-6 flex-auto">
@@ -70,18 +71,51 @@ function UpdatePostModal(props) {
                                     required
                                 />
                             </div>
+                            <InputLabel
+                                for="status"
+                                className="mx-6 mb-2 text-lg"
+                            >
+                                Who Can See
+                            </InputLabel>
+                            <div className="relative p-6 flex-auto">
+                                <select
+                                    name="status"
+                                    id="status"
+                                    value={data.status}
+                                    className="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    onChange={(e) =>
+                                        setData("status", e.target.value)
+                                    }
+                                    required
+                                >
+                                    <option value="Open to Everyone">
+                                        Open to Everyone
+                                    </option>
+                                    <option value="Only Friends">
+                                        Only Friends
+                                    </option>
+                                    <option value="Hidden">Hidden</option>
+                                </select>
+                            </div>
 
                             <InputError
                                 message={errors.image}
-                                className="mt-2 mx-4"
+                                className="mt-2 mx-6"
                             />
 
                             <InputLabel
                                 for="image"
-                                className="mx-4 mb-2 text-lg"
+                                className="mx-6 mb-2 text-lg"
                             >
                                 Image
                             </InputLabel>
+                            {props.post.post_image && (
+                                <img
+                                    className="mx-6 w-20 h-20 rounded"
+                                    src={data.image}
+                                />
+                            )}
+
                             <div className="mx-4">
                                 <FileInput
                                     id="image"

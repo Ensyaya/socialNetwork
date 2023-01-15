@@ -13,8 +13,13 @@ class Post extends Model
         'post_content',
         'post_image',
         'post_imageId',
+        'profile_id',
         'user_id',
         'post_status',
     ];
 
+//     public function user()
+//     {
+//         return $this->hasMany(User::class, 'user_id');
+//     }
 }

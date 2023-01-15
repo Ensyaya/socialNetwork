@@ -31,8 +31,12 @@ export default function MainLayout({ auth, children }) {
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
+                                    href={route("profile.userProfile", {
+                                        slug: "admin",
+                                    })}
+                                    active={route().current(
+                                        "profile.userProfile"
+                                    )}
                                 >
                                     Dashboard
                                 </NavLink>

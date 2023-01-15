@@ -12,6 +12,8 @@ import FileInput from "@/Components/FileInput";
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
+        surname: "",
+        username: "",
         email: "",
         image: "",
         password: "",
@@ -57,6 +59,38 @@ export default function Register() {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+                <div className="mt-4">
+                    <InputLabel forInput="surname" value="Surname" />
+
+                    <TextInput
+                        id="surname"
+                        name="surname"
+                        value={data.surname}
+                        className="mt-1 block w-full"
+                        autoComplete="surname"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.surname} className="mt-2" />
+                </div>
+                <div className="mt-4">
+                    <InputLabel forInput="username" value="Username" />
+
+                    <TextInput
+                        id="username"
+                        name="username"
+                        value={data.username}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.username} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -114,7 +148,7 @@ export default function Register() {
                         className="mt-2"
                     />
                 </div>
-                <div>
+                <div className="mt-4">
                     <InputLabel forInput="image" value="Image" />
 
                     <FileInput

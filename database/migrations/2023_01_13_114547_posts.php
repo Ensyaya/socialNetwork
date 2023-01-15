@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('post_image')->nullable();
             $table->string('post_imageId')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('profile_id');
             $table->enum('post_status', [
                 'Open to Everyone', 'Only Friends', 'Hidden'
             ])->default('Open to Everyone');
             $table->timestamps();
+            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
     }
 

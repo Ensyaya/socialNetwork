@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\post;
 
-use App\Models\Post;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-
+use App\Models\Post;
+use App\Models\Profile;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class PostController extends Controller
 {
-
     public function createPost(Request $request)
     {
         $request->validate([
@@ -19,7 +18,7 @@ class PostController extends Controller
         ]);
 
         $userId = auth()->user()->id;
-
+        $profile = Profile::where('user_id', $userId)->first();
 
         if ($request->hasFile('image')) {
 
@@ -28,14 +27,18 @@ class PostController extends Controller
             $imageId = $result->getPublicId();
             Post::create([
                 'post_content' => $request->content,
+                'post_status' => $request->status,
                 'user_id' => $userId,
+                'profile_id' => $profile->id,
                 'post_image' => $imagePath,
                 'post_imageId' => $imageId,
             ]);
         } else {
             Post::create([
                 'post_content' => $request->content,
+                'post_status' => $request->status,
                 'user_id' => $userId,
+                'profile_id' => $profile->id,
                 'post_image' => null,
                 'post_imageId' => null,
             ]);
@@ -57,18 +60,19 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $userId = auth()->user()->id;
-
-        if ($post->post_imageId) {
-            $deleted = $post->post_imageId;
-            Cloudinary::destroy($deleted);
-        }
         if ($request->hasFile('image')) {
+
+            if ($post->post_imageId) {
+                $deleted = $post->post_imageId;
+                Cloudinary::destroy($deleted);
+            }
             $result = $request->file('image')->storeOnCloudinary('socialnetwork/posts');
             $imagePath = $result->getPath();
             $imageId = $result->getPublicId();
 
             $post->update([
                 'post_content' => $request->content,
+                'post_status' => $request->status,
                 'user_id' => $userId,
                 'post_image' => $imagePath,
                 'post_imageId' => $imageId,
@@ -76,9 +80,10 @@ class PostController extends Controller
         } else {
             $post->update([
                 'post_content' => $request->content,
+                'post_status' => $request->status,
                 'user_id' => $userId,
-                'post_image' => null,
-                'post_imageId' => null,
+                'post_image' => $post->post_image,
+                'post_imageId' => $post->post_imageId,
             ]);
         }
     }

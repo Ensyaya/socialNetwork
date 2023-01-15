@@ -47,6 +47,7 @@ class ProfileController extends Controller
 
             $user->update([
                 'name' => $request->name,
+                'surname' => $request->surname,
                 'email' => $request->email,
                 'image' => $imagePath,
                 'imageId' => $imageId,
@@ -54,6 +55,7 @@ class ProfileController extends Controller
         } else {
             $user->update([
                 'name' => $request->name,
+                'surname' => $request->surname,
                 'email' => $request->email,
                 'image' => $user->image,
                 'imageId' => $user->imageId,

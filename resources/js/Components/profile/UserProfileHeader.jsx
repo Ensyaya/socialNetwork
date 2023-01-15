@@ -1,11 +1,11 @@
-export default function ProfileHeader({ auth }) {
+export default function UserProfileHeader({ user }) {
     return (
         <div>
             <div className="flex flex-col">
                 <div className="w-full flex justify-center">
                     {/* profile photo */}
                     <img
-                        src={auth.user.image}
+                        src={user.image}
                         className="rounded-full top-48 inset-x-96 border-4 border-white w-40 h-40"
                         style={{ width: "168px", height: "168px" }}
                     />
@@ -13,10 +13,8 @@ export default function ProfileHeader({ auth }) {
             </div>
             {/* // INFOS */}
             <div className="flex justify-center flex-col mt-5 mb-3.5">
-                <h1 className="text-center font-bold text-3xl">{auth.user.name} {auth.user.surname}</h1>
-                <p className="text-center text-sm">
-                @{auth.user.username}
-                </p>
+                <h1 className="text-center font-bold text-3xl">{user.name}</h1>
+                <p className="text-center text-opacity-0">@{user.username}</p>
                 {/* <hr className="full flex self-center w-2/3 mt-2" /> */}
             </div>
             {/* // END INFOS */}
