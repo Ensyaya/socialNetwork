@@ -42,6 +42,23 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
+            <div className="fixed top-0 right-0 px-6 py-4 sm:block">
+                <>
+                    <Link
+                        href={route("login")}
+                        className="text-sm text-gray-700 dark:text-gray-500 underline"
+                    >
+                        Log in
+                    </Link>
+
+                    <Link
+                        href={route("register")}
+                        className="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
+                    >
+                        Register
+                    </Link>
+                </>
+            </div>
 
             <form onSubmit={submit} encType="multipart/form-data">
                 <div>
@@ -157,7 +174,9 @@ export default function Register() {
                         className="mt-1 block w-full p-2"
                         autoComplete="image"
                         isFocused={true}
-                        handleChange={e => setData('image', e.target.files[0])}
+                        handleChange={(e) =>
+                            setData("image", e.target.files[0])
+                        }
                         required
                     />
 

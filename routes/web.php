@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('user/post/{id}', [PostController::class, 'deletePost'])->name('post.deletePost');
 
     Route::get('user/profile/{slug}', [PageController::class, 'userProfile'])->name('profile.userProfile');
+    Route::get('users', [PageController::class, 'usersPage'])->name('profile.usersPage');
 
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

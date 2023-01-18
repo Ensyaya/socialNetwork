@@ -24,7 +24,7 @@ return new class extends Migration
                 'Open to Everyone', 'Only Friends', 'Hidden'
             ])->default('Open to Everyone');
             $table->timestamps();
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+            // $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
     }
 

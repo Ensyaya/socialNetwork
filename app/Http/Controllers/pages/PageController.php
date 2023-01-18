@@ -14,6 +14,15 @@ class PageController extends Controller
 {
     public function profileIndex(): Response
     {
+        // $users = User::all();
+        // foreach ($users as $user) {
+        //     $userId = $user->id;
+        //     $slug = $user->username;
+        //     Profile::create([
+        //         'user_id' => $user->id,
+        //         'slug' => $user->username,
+        //     ]);
+        // }
         $userId = auth()->user()->id;
         $posts = Post::where('user_id', $userId)->latest()->get();
         return Inertia::render('Profile', [
@@ -32,5 +41,15 @@ class PageController extends Controller
             'posts' => $posts,
             'user' => $user
         ]);
+    }
+
+    public function usersPage()
+    {   
+        $userId = auth()->user()->id;
+        $users = User::where('id', '!=', $userId)->get();
+        return Inertia::render('AllUsers', [
+            'users' => $users,
+        ]);
+
     }
 }
